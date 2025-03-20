@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ini.sh - Initialize Dockerized Web App with:
-#   - Frontend: Vue 3 + latest Node.js (configured to run on port 8080)
-#   - Backend: Laravel 10 + PHP 8.3 (installed in backend/app, using MySQL)
+#   - Frontend: Vue latest + latest Node.js (configured to run on port 8080)
+#   - Backend: Laravel latest + PHP 8.3 (installed in backend/app, using MySQL)
 #   - MySQL 8 (with persistent volume)
 #   - Mailpit for email testing
 #   - phpMyAdmin for database management
@@ -36,7 +36,7 @@ if [ ! -f "docker-compose.yml" ]; then
 version: "3.9"
 
 services:
-  # Frontend service (Vue 3 + Node.js)
+  # Frontend service (Vue + Node.js)
   frontend:
     image: node:latest
     working_dir: /app
@@ -49,7 +49,7 @@ services:
     depends_on:
       - backend
 
-  # Backend service (Laravel 10 with PHP 8.3)
+  # Backend service (Laravel latest with PHP 8.3)
   backend:
     build:
       context: ./backend
@@ -141,7 +141,7 @@ $DOCKER_COMPOSE build backend
 
 # 4. Initialize Laravel project if it hasn't been created in backend/app
 if [ ! -f "backend/app/composer.json" ]; then
-  echo "Initializing new Laravel 10 project in backend/app..."
+  echo "Initializing new Laravel project in backend/app..."
   $DOCKER_COMPOSE run --rm backend composer create-project laravel/laravel .
 
   echo "Configuring Laravel environment..."
@@ -178,7 +178,7 @@ else
   fi
 fi
 
-# 5. Initialize Vue 3 project if not already set up
+# 5. Initialize Vue project if not already set up
 if [ ! -f "frontend/package.json" ]; then
   echo "Initializing new Vue 3 project in frontend..."
   $DOCKER_COMPOSE run --rm frontend npm create vite@latest . -- --template vue

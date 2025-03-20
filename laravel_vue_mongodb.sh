@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ini.sh - Initialize Dockerized Web App with:
-#   - Frontend: Vue 3 + latest Node.js (configured to run on port 8080)
-#   - Backend: Laravel 10 + PHP 8.3 (installed in backend/app, using MongoDB)
+#   - Frontend: Vue latest + latest Node.js (configured to run on port 8080)
+#   - Backend: Laravel latest + PHP 8.3 (installed in backend/app, using MongoDB)
 #   - MongoDB latest (with persistent volume)
 #   - Mailpit for email testing
 #   - Mongo Express for database management
@@ -144,7 +144,7 @@ $DOCKER_COMPOSE build backend
 
 # 4. Initialize Laravel project if it hasn't been created in backend/app
 if [ ! -f "backend/app/composer.json" ]; then
-  echo "Initializing new Laravel 10 project in backend/app..."
+  echo "Initializing new Laravel latest project in backend/app..."
   $DOCKER_COMPOSE run --rm backend composer create-project laravel/laravel .
 
   echo "Configuring Laravel environment for MongoDB..."
@@ -204,9 +204,9 @@ else
   fi
 fi
 
-# 5. Initialize Vue 3 project if not already set up
+# 5. Initialize Vue project if not already set up
 if [ ! -f "frontend/package.json" ]; then
-  echo "Initializing new Vue 3 project in frontend..."
+  echo "Initializing new Vue project in frontend..."
   $DOCKER_COMPOSE run --rm frontend npm create vite@latest . -- --template vue
 
   echo "Creating Vue .env file..."
